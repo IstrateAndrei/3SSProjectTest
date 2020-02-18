@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Test3ss</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="locations_tab_string">Locations</string>
+    <string name="current_location_tab_string">Current Location</string>
+    <string name="location_permission_warning_string">You have to allow location permission to get weather info.\n\n<b>Tap here to allow permission</b></string>
+    <string name="degree_symbol_string">°</string>
+    <string name="today_string">Today</string>
+    <string name="tomorrow_string">Tomorrow</string>
+    <string name="sixteen_days_string">16 days</string>
+    <string name="not_available_string">Available only for paid accounts!</string>
 </resources>
