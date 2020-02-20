@@ -4,7 +4,7 @@ import com.project.test_3ss.data.local.LocalDataSource
 import com.project.test_3ss.data.network.ApiInterface
 import com.project.test_3ss.data.network.RemoteDataSource
 import com.project.test_3ss.data.repository.Repository
-import com.project.test_3ss.utils.ApiConstants
+import com.project.test_3ss.utils.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module.Module
@@ -24,7 +24,7 @@ object AppModules {
             client.addInterceptor(interceptor)
 
             Retrofit.Builder()
-                .baseUrl(ApiConstants.BASE_URL)
+                .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client.build())

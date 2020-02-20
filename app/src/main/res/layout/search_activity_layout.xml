@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true">
+
+
+    <ImageView
+        android:id="@+id/back_button_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary"
+        android:padding="10dp"
+        android:src="@drawable/ic_arrow_back_white_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/search_actionbar_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/search_actionbar_tv"
+        style="@style/weatherLabelText"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:text="@string/check_weather_for_string"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_button_iv"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_location_til"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/degree_switch"
+        app:layout_constraintEnd_toStartOf="@id/location_img"
+        app:layout_constraintStart_toStartOf="@id/view_weather_btn">
+
+        <EditText
+            android:id="@+id/search_location_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="25dp"
+            android:alpha="0.8"
+            android:background="@android:color/transparent"
+            android:hint="@string/location_string"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <ImageView
+        android:id="@+id/location_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.8"
+        android:padding="5dp"
+        android:src="@drawable/ic_my_location_grey_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/search_location_til"
+        app:layout_constraintEnd_toEndOf="@id/view_weather_btn"
+        app:layout_constraintTop_toTopOf="@id/search_location_til" />
+
+    <Switch
+        android:id="@+id/degree_switch"
+        style="@style/switchElementStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/degree_switch_string"
+        app:layout_constraintBottom_toTopOf="@id/favourite_switch"
+        app:layout_constraintEnd_toEndOf="@id/favourite_switch"
+        app:layout_constraintStart_toStartOf="@id/favourite_switch" />
+
+    <Switch
+        android:id="@+id/favourite_switch"
+        style="@style/switchElementStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/favourite_string"
+        app:layout_constraintBottom_toTopOf="@id/view_weather_btn"
+        app:layout_constraintStart_toStartOf="@id/view_weather_btn" />
+
+    <Button
+        android:id="@+id/view_weather_btn"
+        style="@style/weatherLabelText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="150dp"
+        android:gravity="center"
+        android:text="@string/view_weather_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:stateListAnimator="@null"/>
+
+
+    <FrameLayout
+        android:id="@+id/ld_frame_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

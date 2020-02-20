@@ -1,5 +1,22 @@
 <resources>
     <string name="app_name">Test3ss</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="locations_tab_string">Locations</string>
+    <string name="location_string">Location</string>
+    <string name="current_location_tab_string">Current Location</string>
+    <string name="location_permission_warning_string">You have to allow location permission to get weather info.\n\n<b>Tap here to allow permission</b></string>
+    <string name="degree_symbol_string">°</string>
+    <string name="today_string">Today</string>
+    <string name="tomorrow_string">Tomorrow</string>
+    <string name="sixteen_days_string">16 days</string>
+    <string name="not_available_string">Available only for paid accounts!</string>
+    <string name="check_weather_for_string">Check weather for</string>
+    <string name="view_weather_string">View weather</string>
+    <string name="favourite_string">Favourite</string>
+    <string name="degree_switch_string">°C/°F</string>
+    <string name="fill_location_field_warning_string">Fill location field first!</string>
+    <string name="invalid_location_string">Invalid Location!</string>
+    <string name="invalid_location_message_string">Could not find any valid location. Please type again.</string>
+    <string name="ok_string">OK</string>
+    <string name="error_title_string">Error!</string>
+    <string name="error_message_string">An error has occurred</string>
 </resources>
