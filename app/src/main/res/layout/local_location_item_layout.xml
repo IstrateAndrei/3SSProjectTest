@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/ll_icon_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="15dp"
+        tools:src="@drawable/art_clear"/>
+
+    <TextView
+        android:id="@+id/ll_description_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/ll_icon_iv"
+        app:layout_constraintStart_toEndOf="@id/ll_icon_iv"
+        android:layout_marginStart="15dp"
+        tools:text="23*C, Vreme buna domnilor"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/ll_location_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/ll_description_tv"
+        app:layout_constraintTop_toBottomOf="@id/ll_description_tv"
+        android:layout_marginTop="5dp"
+        android:drawableStart="@drawable/ic_location_on_grey_24dp"
+        android:drawablePadding="5dp"
+        android:textSize="16sp"
+        tools:text="Targu Mures"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

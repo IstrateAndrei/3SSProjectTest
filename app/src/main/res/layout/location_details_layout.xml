@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/colorPrimary">
-
 
     <TextView
         android:id="@+id/cl_description_tv"
@@ -17,16 +15,16 @@
         android:ems="13"
         android:maxLines="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Cluj-Napoca, 23 Grade celsius betiash" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/cl_save_iv"
+    <CheckBox
+        android:id="@+id/cl_save_cb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_marginStart="10dp"
-        android:src="@android:drawable/ic_menu_save"
+        android:button="@drawable/heart_checkbox_selector_drawable"
+        android:buttonTint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@id/cl_description_tv"
         app:layout_constraintEnd_toStartOf="@id/cl_refresh_iv"
         app:layout_constraintTop_toTopOf="@id/cl_description_tv" />
@@ -45,39 +43,47 @@
         android:id="@+id/cl_day_rg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:background="@android:color/white"
         android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_description_tv">
 
         <RadioButton
             android:id="@+id/cl_today_rb"
             style="@style/dayRadioButtonStyle"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start|center"
             android:layout_weight="1"
             android:text="@string/today_string" />
 
         <RadioButton
             android:id="@+id/cl_tomorrow_rb"
             style="@style/dayRadioButtonStyle"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="35dp"
             android:layout_weight="1"
             android:text="@string/tomorrow_string" />
 
         <RadioButton
             android:id="@+id/cl_16day_rb"
             style="@style/dayRadioButtonStyle"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|center"
             android:layout_weight="1"
             android:text="@string/sixteen_days_string" />
     </RadioGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cl_forecast_rv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_day_rg" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

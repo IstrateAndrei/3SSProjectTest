@@ -13,6 +13,6 @@ data class ForecastListModel(
     @SerializedName("clouds") var clouds: CloudModel = CloudModel(),
     @SerializedName("wind") var wind: WindModel = WindModel(),
     @SerializedName("sys") var sys: SysModel = SysModel(),
-    @SerializedName("dt_text") var dtText: Date = Date()
+    @SerializedName("dt_txt") var dtText: String = ""
 ) : Parcelable {
 }

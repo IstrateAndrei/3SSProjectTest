@@ -22,6 +22,13 @@ interface ApiInterface {
         @Query("appid") apiKey: String
     ): Observable<WeatherResponse>
 
+    //GET 5d/3h forecast by city name
+    @GET("/data/2.5/forecast")
+    fun getForecastByName(
+        @Query("q") name: String,
+        @Query("appid") apiKey: String
+    ) : Observable<ForecastResponse>
+
     //get 5 days/3 hour by city ID
     @GET("/data/2.5/forecast")
     fun getLocationForecastById(
