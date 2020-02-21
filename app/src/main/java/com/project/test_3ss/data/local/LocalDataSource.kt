@@ -19,6 +19,7 @@ class LocalDataSource : KoinComponent {
             mRealm?.let {
                 if (!it.isInTransaction) it.beginTransaction()
                 it.copyToRealm(location)
+                it.commitTransaction()
             }
         }
     }
@@ -30,6 +31,7 @@ class LocalDataSource : KoinComponent {
                 mRealm!!.where(LocationRealmModel::class.java).contains("name", locationName)
             val results = mQuery.findAll()
             results.deleteAllFromRealm()
+            it.commitTransaction()
         }
     }
 
@@ -41,6 +43,7 @@ class LocalDataSource : KoinComponent {
         mRealm?.let {
             if (!it.isInTransaction) it.beginTransaction()
             val results = it.where(LocationRealmModel::class.java).findAll()
+            it.commitTransaction()
             if (results.any { item -> locationId == item.id }) return true
         }
         return false

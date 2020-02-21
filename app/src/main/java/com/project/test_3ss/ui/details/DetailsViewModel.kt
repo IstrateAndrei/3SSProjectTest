@@ -20,11 +20,11 @@ class DetailsViewModel : ViewModel(), KoinComponent {
     val errorObservable: MutableLiveData<Throwable> = MutableLiveData()
     val weatherObservable: MutableLiveData<WeatherResponse> = MutableLiveData()
 
-    fun getCurrentForecast(latitude: Double, longitude: Double) {
-        repository.getRemoteForecastByLocation(latitude, longitude)
+    fun getWeatherById(locationId: Int) {
+        repository.getRemoteWeatherById(locationId)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<ForecastResponse> {
+            .subscribe(object : Observer<WeatherResponse> {
                 override fun onComplete() {
 
                 }
@@ -33,8 +33,8 @@ class DetailsViewModel : ViewModel(), KoinComponent {
 
                 }
 
-                override fun onNext(t: ForecastResponse) {
-                    forecastObservable.value = t
+                override fun onNext(t: WeatherResponse) {
+                    weatherObservable.value = t
                 }
 
                 override fun onError(e: Throwable) {
@@ -44,7 +44,7 @@ class DetailsViewModel : ViewModel(), KoinComponent {
             })
     }
 
-    fun getCurrentWeather(latitude: Double, longitude: Double){
+    fun getCurrentWeather(latitude: Double, longitude: Double) {
         repository.getRemoteCurrentLocationWeather(latitude, longitude)
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
@@ -103,4 +103,6 @@ class DetailsViewModel : ViewModel(), KoinComponent {
     fun removeLocalLocation(locationName: String) {
         repository.removeLocalLocation(locationName)
     }
+
+    //todo make generic Observer
 }

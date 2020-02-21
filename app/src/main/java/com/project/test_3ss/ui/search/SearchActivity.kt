@@ -19,11 +19,13 @@ import kotlinx.android.synthetic.main.search_activity_layout.*
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var searchViewModel: SearchViewModel
+    private var isFavourite = false
 
     private val locationDetailsObserver = Observer<WeatherResponse> {
         //open location details screen and bundle the data
         val bundle = Bundle()
-        bundle.putParcelable(Constants.BUNDLE_WEATHER_RESPONSE, it)
+        bundle.putParcelable(Constants.BUNDLE_WEATHER_RESPONSE_KEY, it)
+        bundle.putBoolean(Constants.BUNDLE_IS_FAVOURITE_KEY, isFavourite)
         val fragment = DetailsFragment()
         fragment.arguments = bundle
         supportFragmentManager.beginTransaction().replace(R.id.ld_frame_container, fragment)
@@ -52,6 +54,20 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.search_activity_layout)
         initListeners()
         observe()
+
+        intent.extras?.let{
+            val locationId = it.getInt(Constants.INTENT_LOCATION_ID_KEY)
+            openLocationDetails(locationId)
+        }
+    }
+
+    private fun openLocationDetails(locationId: Int){
+        val bundle = Bundle()
+        bundle.putInt(Constants.BUNDLE_LOCATION_ID_KEY, locationId)
+        val fragment = DetailsFragment()
+        fragment.arguments = bundle
+        supportFragmentManager.beginTransaction().replace(R.id.ld_frame_container, fragment)
+            .addToBackStack(DetailsFragment::class.java.simpleName).commit()
     }
 
     private fun observe() {
@@ -70,7 +86,7 @@ class SearchActivity : AppCompatActivity() {
         }
 
         favourite_switch.setOnCheckedChangeListener { compoundButton, b ->
-            //todo handle this later
+            isFavourite = b
         }
 
         view_weather_btn.setOnClickListener {
@@ -89,7 +105,9 @@ class SearchActivity : AppCompatActivity() {
 
         location_img.setOnClickListener {
             //todo redirect to current location page
-            startActivity(Intent(this, MainActivity::class.java))
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra(Constants.INTENT_CURRENT_LOCATION_REDIRECT_KEY, true)
+            startActivity(intent)
             this.finish()
         }
 

@@ -35,6 +35,10 @@ class Repository : KoinComponent {
         return remoteSource.getLocationForecastById(cityId)
     }
 
+    fun getRemoteWeatherById(locationId: Int): Observable<WeatherResponse> {
+        return remoteSource.getWeatherById(locationId)
+    }
+
     fun getRemoteForecastByLocation(
         latitude: Double,
         longitude: Double

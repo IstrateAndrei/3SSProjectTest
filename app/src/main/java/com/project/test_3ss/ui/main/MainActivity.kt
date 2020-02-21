@@ -13,9 +13,11 @@ import com.google.android.gms.common.api.internal.LifecycleCallback
 import com.google.android.material.tabs.TabLayoutMediator
 import com.project.test_3ss.R
 import com.project.test_3ss.ui.search.SearchActivity
+import com.project.test_3ss.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,19 +32,19 @@ class MainActivity : AppCompatActivity() {
             }
         }.attach()
 
+        intent?.extras?.let { bundle ->
+            val isRedirect = bundle.getBoolean(Constants.INTENT_CURRENT_LOCATION_REDIRECT_KEY)
+            if (isRedirect) view_pager.currentItem = 1
+        }
+
         search_fab.setOnClickListener {
             startActivity(Intent(this, SearchActivity::class.java))
             this.finish()
         }
     }
 
-    fun refreshViewPager() {
-        view_pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-
-            }
-        })
+    fun setupPagerCallback(callback: ViewPager2.OnPageChangeCallback) {
+        view_pager.registerOnPageChangeCallback(callback)
     }
 
 }

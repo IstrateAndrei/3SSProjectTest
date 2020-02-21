@@ -33,4 +33,9 @@ class RemoteDataSource : KoinComponent {
     fun getForecastByLocation(latitude: Double, longitude: Double): Observable<ForecastResponse> {
         return api.getForecastByLocation(latitude, longitude, Constants.API_KEY)
     }
+
+    fun getWeatherById(locationId: Int): Observable<WeatherResponse>{
+        return api.getWeatherById(locationId, Constants.API_KEY)
+    }
+
 }

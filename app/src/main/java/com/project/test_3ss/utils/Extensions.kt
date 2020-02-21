@@ -7,6 +7,9 @@ import android.content.Context
 import android.location.Location
 import android.location.LocationManager
 import com.orhanobut.hawk.Hawk
+import com.project.test_3ss.data.models.LocalLocationModel
+import com.project.test_3ss.data.models.realmModels.LocationRealmModel
+import com.project.test_3ss.data.models.response.WeatherResponse
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -110,4 +113,33 @@ fun defaultOneButtonDialog(
 
     val mDialog = builder.create()
     mDialog.show()
+}
+
+fun MutableList<LocationRealmModel>.toLocalLocations(): MutableList<LocalLocationModel> {
+
+    val localLocationList = mutableListOf<LocalLocationModel>()
+    var locationItem: LocalLocationModel
+
+    this.forEach { item ->
+        run {
+            locationItem = LocalLocationModel()
+            locationItem.id = item.id
+            locationItem.description = item.description
+            locationItem.name = item.name
+            locationItem.temperature = item.temperature
+            locationItem.weatherMain = item.weatherMain
+            localLocationList.add(locationItem)
+        }
+    }
+    return localLocationList
+}
+
+fun WeatherResponse.weatherToRealm(): LocationRealmModel {
+    val localLocation = LocationRealmModel()
+    localLocation.id = this.id.toInt()
+    localLocation.name = this.name
+    localLocation.description = this.weather.first().description
+    localLocation.temperature = this.main.temp
+    localLocation.weatherMain = this.weather.first().main
+    return localLocation
 }

@@ -20,7 +20,6 @@ import com.project.test_3ss.data.models.realmModels.LocationRealmModel
 import com.project.test_3ss.data.models.response.ForecastResponse
 import com.project.test_3ss.data.models.response.WeatherResponse
 import com.project.test_3ss.ui.main.ForecastAdapter
-import com.project.test_3ss.ui.main.MainActivity
 import com.project.test_3ss.utils.*
 import com.tbruyelle.rxpermissions2.RxPermissions
 import io.reactivex.disposables.CompositeDisposable
@@ -33,6 +32,7 @@ class DetailsFragment : Fragment() {
     private val mDisposable = CompositeDisposable()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var locationId = 0
+    private var isFavorite = false
     private var isToday = false
     private var is16Days = false
 
@@ -48,17 +48,22 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         detailsViewModel = ViewModelProvider(requireActivity()).get(DetailsViewModel::class.java)
         observe()
+        initListeners()
         if (arguments == null) requestLocationAccess()
         else {
             arguments?.let { bundle ->
                 val weather =
-                    bundle.getParcelable<WeatherResponse>(Constants.BUNDLE_WEATHER_RESPONSE)
+                    bundle.getParcelable<WeatherResponse>(Constants.BUNDLE_WEATHER_RESPONSE_KEY)
+                isFavorite = bundle.getBoolean(Constants.BUNDLE_IS_FAVOURITE_KEY)
                 weather?.let {
                     detailsViewModel.weatherObservable.value = it
+                    return
                 }
+
+                val locationId = bundle.getInt(Constants.BUNDLE_LOCATION_ID_KEY)
+                detailsViewModel.getWeatherById(locationId)
             }
         }
-        initListeners()
     }
 
     private val mLocationCallback = object : LocationCallback() {
@@ -137,6 +142,12 @@ class DetailsFragment : Fragment() {
 
         cl_save_cb.isChecked = detailsViewModel.checkIfLocationSaved(weather)
         locationId = weather.id.toInt()
+
+        if (isFavorite) {
+            detailsViewModel.saveLocalLocation(weather.weatherToRealm())
+            cl_save_cb.isChecked = true
+        }
+
     }
 
     private val forecastObserver = Observer<ForecastResponse> {
@@ -200,23 +211,17 @@ class DetailsFragment : Fragment() {
         cl_save_cb.setOnCheckedChangeListener { _, b ->
             if (b) {
                 detailsViewModel.weatherObservable.value?.let {
-                    val localLocation = LocationRealmModel()
-                    localLocation.id = it.id.toInt()
-                    localLocation.name = it.name
-                    localLocation.description = it.weather.first().description
-                    localLocation.temperature = it.main.temp
-                    localLocation.weatherMain = it.weather.first().main
-                    detailsViewModel.saveLocalLocation(localLocation)
-
+                    detailsViewModel.saveLocalLocation(it.weatherToRealm())
                 }
             } else {
                 detailsViewModel.weatherObservable.value?.let {
                     detailsViewModel.removeLocalLocation(it.name)
                 }
             }
-            if (activity is MainActivity) {
-                (activity as MainActivity).refreshViewPager()
-            }
+        }
+
+        cl_refresh_iv.setOnClickListener {
+            detailsViewModel.getForecastById(locationId)
         }
     }
 }

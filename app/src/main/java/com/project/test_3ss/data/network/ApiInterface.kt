@@ -9,16 +9,25 @@ import retrofit2.http.Query
 
 interface ApiInterface {
 
+    //GET weather by location name
     @GET("/data/2.5/weather")
     fun getLocationWeather(
         @Query("q") location: String,
         @Query("appid") apiKey: String
     ): Observable<WeatherResponse>
 
+    //GET weather by location coordinates - lat & long
     @GET("/data/2.5/weather")
     fun getCurrentLocationWeather(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
+        @Query("appid") apiKey: String
+    ): Observable<WeatherResponse>
+
+    //GET weather by location ID
+    @GET("/data/2.5/weather")
+    fun getWeatherById(
+        @Query("id") id: Int,
         @Query("appid") apiKey: String
     ): Observable<WeatherResponse>
 
@@ -27,14 +36,14 @@ interface ApiInterface {
     fun getForecastByName(
         @Query("q") name: String,
         @Query("appid") apiKey: String
-    ) : Observable<ForecastResponse>
+    ): Observable<ForecastResponse>
 
     //get 5 days/3 hour by city ID
     @GET("/data/2.5/forecast")
     fun getLocationForecastById(
         @Query("id") cityId: Int,
         @Query("appid") apiKey: String
-    ) : Observable<ForecastResponse>
+    ): Observable<ForecastResponse>
 
     @GET("/data/2.5/forecast")
     fun getForecastByLocation(
